@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:layout_width="match_parent" android:layout_height="70dp">
+    <TextView
+        android:id="@+id/text_contact_name"
+        style="@style/TextHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"/>
+    <TextView
+        android:layout_below="@id/text_contact_name"
+        android:layout_marginTop="10dp"
+        style="@style/TextSubHeader"
+        android:id="@+id/text_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+7"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/image_contact"
+        android:src="@mipmap/placeholder"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+</RelativeLayout>
