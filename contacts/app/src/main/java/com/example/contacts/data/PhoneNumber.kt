@@ -3,6 +3,7 @@ package com.example.contacts.data
 import android.os.Parcel
 import android.os.Parcelable
 import com.example.contacts.service.PhoneType
+import kotlinx.android.parcel.Parcelize
 
 data class PhoneNumber(val type: PhoneType,val number: String?) : Parcelable {
     constructor(parcel: Parcel) : this(

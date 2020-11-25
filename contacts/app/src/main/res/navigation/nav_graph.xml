@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/contactsListFragment"
         android:name="com.example.contacts.ui.main.contactslist.ContactsListFragment"
-        android:label="Contacts list"
+        android:label="@string/contacts_list"
         tools:layout="@layout/contacts_list_fragment" >
         <action
             android:id="@+id/action_contactsListFragment_to_contactInfoFragment"
@@ -18,6 +18,6 @@
     <fragment
         android:id="@+id/contactInfoFragment"
         android:name="com.example.contacts.ui.main.contactinfo.ContactInfoFragment"
-        android:label="Contact info"
+        android:label="@string/contact_info"
         tools:layout="@layout/contact_info_fragment" />
 </navigation>

@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.provider.ContactsContract
 import com.example.contacts.service.PhoneType
+import kotlinx.android.parcel.Parcelize
 
 data class ContactInfo(val name: String?,  val imageUri: String?, val phoneNumbers: List<PhoneNumber>?):Parcelable {
     constructor(parcel: Parcel) : this(

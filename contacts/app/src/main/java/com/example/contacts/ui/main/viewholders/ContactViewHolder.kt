@@ -7,16 +7,13 @@ import com.example.contacts.data.ContactInfo
 import com.example.contacts.databinding.ItemContactLayoutBinding
 import com.example.contacts.util.loadImage
 
-class ContactViewHolder (private val itemBinding: ItemContactLayoutBinding,private val onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(itemBinding.root) {
+class ContactViewHolder (val itemBinding: ItemContactLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root) {
     var tag: Int = 0
 
-    init {
-        itemBinding.root.setOnClickListener {
-            onItemClick(tag)
-        }
-    }
+    init {}
 
-    fun bind(contact: ContactInfo) {
+    fun bind(contact: ContactInfo,tag: Int = 0) {
+        this.tag = tag
         itemBinding.textContactName.text = contact.name
        itemBinding.textPhoneNumber.text = "Phone: ${contact.defaultPhone?.number ?: "--"}"
        if (!contact.imageUri.isNullOrEmpty()) {

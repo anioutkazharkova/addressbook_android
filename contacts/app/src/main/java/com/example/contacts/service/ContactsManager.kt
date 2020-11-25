@@ -69,6 +69,7 @@ class ContactsManager {
                 }
             }
         }
+       cursor?.close()
         return contactList
     }
 }

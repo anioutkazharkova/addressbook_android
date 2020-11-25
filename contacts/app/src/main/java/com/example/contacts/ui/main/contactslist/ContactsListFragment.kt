@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contacts.R
@@ -18,6 +19,7 @@ import com.example.contacts.databinding.ContactsListFragmentBinding
 import com.example.contacts.ui.main.adapters.ContactsAdapter
 import com.example.contacts.util.DialogHelper
 import com.example.contacts.util.autoCleared
+import com.example.contacts.util.observeOnce
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,16 +46,21 @@ class ContactsListFragment : Fragment() {
         setupRecyclerView()
         setupObservers()
 
+        if (checkPermission()) {
+            viewModel.fetchContacts()
+        }
     }
 
     private fun setupRecyclerView() {
-        adapter = ContactsAdapter { onContactClick(it) }
+        adapter = ContactsAdapter {
+            onContactClick(it)
+        }
         binding.listContacts.layoutManager = LinearLayoutManager(requireContext())
         binding.listContacts.adapter = adapter
     }
 
     private fun setupObservers() {
-        viewModel.contactsList.observe(viewLifecycleOwner, Observer {
+        viewModel.contactsList.distinctUntilChanged().observe(viewLifecycleOwner, Observer {
             adapter.setupItems(it)
             adapter.notifyDataSetChanged()
         })
@@ -71,10 +78,6 @@ class ContactsListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        if (checkPermission()) {
-            viewModel.fetchContacts()
-        }
     }
 
     private var isGranted: Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && activity?.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED

@@ -12,7 +12,8 @@ class ContactsListViewModel @ViewModelInject constructor(private val contactsMan
 
     fun fetchContacts() {
         uiScope.launch {
-            contactsList.value = contactsManager.getAllContacts()
+            val result = contactsManager.getAllContacts()
+            contactsList.value = result
         }
     }
 
