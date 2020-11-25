@@ -9,8 +9,7 @@ import com.example.contacts.R
 import com.example.contacts.data.PhoneNumber
 import org.w3c.dom.Text
 
-class PhoneNumberViewHolder(itemView: View) :
-RecyclerView.ViewHolder(itemView) {
+class PhoneNumberViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     lateinit var textPhone: TextView
     lateinit var textType: TextView
 

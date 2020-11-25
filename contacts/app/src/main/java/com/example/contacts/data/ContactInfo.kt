@@ -2,6 +2,8 @@ package com.example.contacts.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.provider.ContactsContract
+import com.example.contacts.service.PhoneType
 
 data class ContactInfo(val name: String?,  val imageUri: String?, val phoneNumbers: List<PhoneNumber>?):Parcelable {
     constructor(parcel: Parcel) : this(
@@ -9,6 +11,11 @@ data class ContactInfo(val name: String?,  val imageUri: String?, val phoneNumbe
         parcel.readString(),
         parcel.createTypedArrayList(PhoneNumber)
     ) {
+    }
+
+    var defaultPhone: PhoneNumber? = null
+    get() {
+        return phoneNumbers?.filter { it.type == PhoneType.MOBILE }?.firstOrNull() ?: phoneNumbers?.firstOrNull()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

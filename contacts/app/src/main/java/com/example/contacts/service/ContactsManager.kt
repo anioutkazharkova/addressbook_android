@@ -2,16 +2,22 @@ package com.example.contacts.service
 
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
-import android.provider.ContactsContract
 import com.example.contacts.ContactsApp
 import com.example.contacts.data.ContactInfo
 import com.example.contacts.data.PhoneNumber
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ContactsManager {
     private var context: Context = ContactsApp.appContext
 
-    fun getContacts(): List<ContactInfo> {
+    suspend fun getAllContacts():List<ContactInfo> {
+        return withContext(Dispatchers.Default) {
+            loadContacts()
+        }
+    }
+
+   private fun loadContacts(): List<ContactInfo> {
         var contactList: ArrayList<ContactInfo> = arrayListOf()
         val contentResolver = context.contentResolver
         val cursor: Cursor? =

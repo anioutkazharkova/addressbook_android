@@ -6,27 +6,63 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contacts.R
+import com.example.contacts.data.ContactInfo
+import com.example.contacts.databinding.ContactInfoFragmentBinding
+import com.example.contacts.databinding.ContactsListFragmentBinding
+import com.example.contacts.ui.main.adapters.ContactsAdapter
+import com.example.contacts.ui.main.adapters.PhoneNumbersAdapter
+import com.example.contacts.ui.main.contactslist.ContactsListViewModel
+import com.example.contacts.util.autoCleared
+import com.example.contacts.util.loadImage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ContactInfoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ContactInfoFragment()
-    }
+    private var binding: ContactInfoFragmentBinding by autoCleared()
+    private val viewModel: ContactInfoViewModel by viewModels()
 
-    private lateinit var viewModel: ContactInfoViewModel
+    private lateinit var adapter: PhoneNumbersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.contact_info_fragment, container, false)
+        binding = ContactInfoFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ContactInfoViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        arguments?.getParcelable<ContactInfo>("item")?.let { viewModel.setupItem(it) }
+
+        setupRecyclerView()
+        setupObservers()
     }
 
+    private fun setupObservers() {
+        viewModel.contact.observe(viewLifecycleOwner, Observer {
+            this.setup(it)
+        })
+    }
+
+    private fun setup(contact: ContactInfo) {
+        binding.textContactName.text = contact.name
+        contact.imageUri?.let {
+            binding.imageContact.loadImage(it)
+        }
+        adapter.setupItems(contact.phoneNumbers ?: arrayListOf())
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun setupRecyclerView() {
+        adapter = PhoneNumbersAdapter()
+        binding.listPhones.layoutManager = LinearLayoutManager(requireContext())
+        binding.listPhones.adapter = adapter
+    }
 }
