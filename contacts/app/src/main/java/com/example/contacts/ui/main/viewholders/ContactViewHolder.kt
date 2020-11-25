@@ -26,7 +26,7 @@ class ContactViewHolder (private val itemBinding: ItemContactLayoutBinding,priva
        if (!contact.imageUri.isNullOrEmpty()) {
            itemBinding.imageContact.loadImage(contact.imageUri!!)
         }else {
-           itemBinding.imageContact.setImageDrawable(null)
+           itemBinding.imageContact.setImageResource(R.mipmap.placeholder)
        }
     }
 }
