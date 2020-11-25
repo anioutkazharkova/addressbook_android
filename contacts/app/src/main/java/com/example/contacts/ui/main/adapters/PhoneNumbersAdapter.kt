@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
 import com.example.contacts.data.ContactInfo
 import com.example.contacts.data.PhoneNumber
+import com.example.contacts.databinding.ItemPhoneNumberLayoutBinding
 import com.example.contacts.ui.main.viewholders.ContactViewHolder
 import com.example.contacts.ui.main.viewholders.PhoneNumberViewHolder
 
@@ -18,8 +19,8 @@ class PhoneNumbersAdapter: RecyclerView.Adapter<PhoneNumberViewHolder>(){
         this.items.addAll(list)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneNumberViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_phone_number_layout, parent, false)
-        return PhoneNumberViewHolder(itemView)
+        val itemBinding = ItemPhoneNumberLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PhoneNumberViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: PhoneNumberViewHolder, position: Int) {

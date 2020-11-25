@@ -1,6 +1,6 @@
 package com.example.contacts.service
 
-enum class PhoneType(value: String)  {
+enum class PhoneType(val value: String)  {
     MOBILE("Mobile"), HOME("Home"), WORK_MOBILE("Work mobile"), WORK("Work"),
     UNKNOWN("");
 

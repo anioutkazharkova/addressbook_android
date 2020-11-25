@@ -7,28 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
 import com.example.contacts.data.ContactInfo
 import com.example.contacts.data.PhoneNumber
+import com.example.contacts.databinding.ItemContactLayoutBinding
 import com.example.contacts.service.PhoneType
 import com.example.contacts.util.loadImage
 
-class ContactViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ContactViewHolder (private val itemBinding: ItemContactLayoutBinding,private val onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(itemBinding.root) {
     var tag: Int = 0
-    lateinit var textPhone: TextView
-    lateinit var textName: TextView
-    lateinit var imageContact: ImageView
 
     init {
-        textPhone = itemView.findViewById(R.id.text_phone_number)
-        textName = itemView.findViewById(R.id.text_contact_name)
-        imageContact = itemView.findViewById(R.id.image_contact)
+        itemBinding.root.setOnClickListener {
+            onItemClick(tag)
+        }
     }
 
     fun bind(contact: ContactInfo) {
-        textName.text = contact.name
-        textPhone.text = "Phone: ${contact.defaultPhone?.number ?: "--"}"
+        itemBinding.textContactName.text = contact.name
+       itemBinding.textPhoneNumber.text = "Phone: ${contact.defaultPhone?.number ?: "--"}"
        if (!contact.imageUri.isNullOrEmpty()) {
-            imageContact.loadImage(contact.imageUri!!)
+           itemBinding.imageContact.loadImage(contact.imageUri!!)
         }else {
-            imageContact.setImageDrawable(null)
+           itemBinding.imageContact.setImageDrawable(null)
        }
     }
 }
