@@ -2,7 +2,6 @@ package com.example.contacts.ui.main.contactslist
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.contacts.data.ContactInfo
 import com.example.contacts.service.ContactsManager
 import com.example.contacts.ui.main.base.BaseViewModel

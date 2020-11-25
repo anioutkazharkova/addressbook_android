@@ -1,7 +1,6 @@
 package com.example.contacts.ui.main.contactinfo
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.contacts.data.ContactInfo
 import com.example.contacts.ui.main.base.BaseViewModel
 

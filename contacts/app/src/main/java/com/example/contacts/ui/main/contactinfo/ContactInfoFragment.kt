@@ -1,22 +1,18 @@
 package com.example.contacts.ui.main.contactinfo
 
-import androidx.lifecycle.ViewModelProvider
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contacts.R
 import com.example.contacts.data.ContactInfo
 import com.example.contacts.databinding.ContactInfoFragmentBinding
-import com.example.contacts.databinding.ContactsListFragmentBinding
-import com.example.contacts.ui.main.adapters.ContactsAdapter
 import com.example.contacts.ui.main.adapters.PhoneNumbersAdapter
-import com.example.contacts.ui.main.contactslist.ContactsListViewModel
 import com.example.contacts.util.autoCleared
 import com.example.contacts.util.loadImage
 import dagger.hilt.android.AndroidEntryPoint
